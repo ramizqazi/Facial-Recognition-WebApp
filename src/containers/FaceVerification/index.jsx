@@ -1,47 +1,46 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useToast } from '@chakra-ui/react';
 
-import AddUserView from './view';
-import { useAddUser } from '../../api/mutations';
+import FaceVerificationView from './view';
+import { useVerifyFace } from '../../api/mutations';
 
 /* =============================================================================
-<AddUser />
+<FaceVerification />
 ============================================================================= */
-const AddUser = () => {
+const FaceVerification = () => {
   const toast = useToast();
 
-  const [name, setName] = useState('');
   const [image, setImage] = useState();
 
-  const { mutateAsync: addUser, isLoading } = useAddUser();
+  const { mutateAsync: verifyface, data, isLoading } = useVerifyFace();
+
+  useEffect(() => {
+    if (data?.Status === 400) {
+      toast({
+        status: 'error',
+        title: 'Error',
+        isClosable: true,
+        duration: 1500,
+        description: data.  Response
+      });
+    }
+  }, [data]);
+
+  console.log('Response Data', data);
 
   const _handleSubmit = async () => {
     try {
-      if (!name || !image) {
+      if (!image) {
         return toast({
+          title: 'Image Not Added',
+          description: 'Please click an image',
           status: 'error',
           duration: 1500,
           isClosable: true,
-          title: 'Incomplete Information',
-          description: 'Please add all the information needed',
         });
       }
-      
-      await addUser({
-        name,
-        image,
-      });
 
-      toast({
-        status: 'success',
-        title: 'Image Saved',
-        isClosable: true,
-        duration: 1500,
-        description: `Image is saved with ${name} name`
-      });
-
-      setImage('')
-      setName('')
+      await verifyface(image);
     } catch (e) {
       toast({
         status: 'error',
@@ -54,12 +53,10 @@ const AddUser = () => {
   };
 
   return (
-    <AddUserView
+    <FaceVerificationView
       image={image}
-      name={name}
       isLoading={isLoading}
       onImageClick={setImage}
-      onNameChange={setName}
       onSumbit={_handleSubmit}
     />
   );
@@ -67,4 +64,4 @@ const AddUser = () => {
 
 /* Export
 ============================================================================= */
-export default AddUser;
+export default FaceVerification;

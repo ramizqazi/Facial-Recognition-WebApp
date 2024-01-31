@@ -19,3 +19,20 @@ export const useAddUser = () =>
       data: formData,
     });
   });
+
+/**
+ * verify face
+ */
+export const useVerifyFace = () =>
+  useMutation(async img => {
+    const formData = new FormData();
+    const image = await (await fetch(img)).blob();
+
+    formData.append('image', image);
+
+    return request({
+      url: 'faceVer',
+      method: 'POST',
+      data: formData,
+    });
+  });
