@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 
 import Welcome from '../containers/Welcome';
-// import AddUser from '../containers/AddUser';
+import AddUser from '../containers/AddUser';
 // import FaceVerification from '../containers/FaceVerification';
 
 /* =============================================================================
@@ -18,8 +18,8 @@ const AppNavigation = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Welcome />} />
-        {/* <Route path="/add-user" element={<AddUser />} />
-        <Route path="/face-verification" element={<FaceVerification />} /> */}
+        <Route path="/add-user" element={<AddUser />} />
+        {/* <Route path="/face-verification" element={<FaceVerification />} /> */}
       </Routes>
     </Router>
   );
