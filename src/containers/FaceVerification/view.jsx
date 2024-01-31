@@ -1,6 +1,14 @@
 import Webcam from 'react-webcam';
 import React, { useCallback, useRef } from 'react';
-import { Box, HStack, IconButton, Img, Text, VStack } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  HStack,
+  IconButton,
+  Img,
+  Text,
+  VStack,
+} from '@chakra-ui/react';
 import { IoCamera, IoCloseSharp, IoCheckmark } from 'react-icons/io5';
 
 /* =============================================================================
@@ -49,22 +57,22 @@ const FaceVerification = ({
 
       {image ? (
         <HStack>
-          <IconButton
-            icon={<IoCloseSharp />}
-            variant="outline"
-            isDisabled={isLoading}
+          <Button
             colorScheme="red"
-            rounded="full"
+            leftIcon={<IoCloseSharp />}
+            isDisabled={isLoading}
             onClick={_handleRemoveImg}
-          />
-          <IconButton
-            icon={<IoCheckmark />}
-            variant="outline"
-            isLoading={isLoading}
+          >
+            Try Again
+          </Button>
+          <Button
             colorScheme="green"
-            rounded="full"
             onClick={onSumbit}
-          />
+            isLoading={isLoading}
+            leftIcon={<IoCheckmark />}
+          >
+            Submit
+          </Button>
         </HStack>
       ) : (
         <IconButton

@@ -1,13 +1,13 @@
 import React, { useCallback, useRef } from 'react';
 import Webcam from 'react-webcam';
 import {
-  Box,
-  Button,
-  HStack,
-  IconButton,
   Img,
+  Box,
   Text,
+  HStack,
+  Button,
   VStack,
+  IconButton,
 } from '@chakra-ui/react';
 import { IoCamera, IoCloseSharp, IoCheckmark } from 'react-icons/io5';
 
@@ -38,7 +38,7 @@ const AddUserView = ({
       <VStack>
         <Box w="700px" h="450px" overflow="hidden" bg="black">
           {image ? (
-            <Img src={image} w='full' h='full' />
+            <Img src={image} w="full" h="full" />
           ) : (
             <Webcam ref={camRef} width={'100%'} height={'100%'} />
           )}
@@ -59,22 +59,22 @@ const AddUserView = ({
 
       {image ? (
         <HStack>
-          <IconButton
-            icon={<IoCloseSharp />}
-            variant="outline"
-            isDisabled={isLoading}
+          <Button
             colorScheme="red"
-            rounded="full"
+            leftIcon={<IoCloseSharp />}
+            isDisabled={isLoading}
             onClick={_handleRemoveImg}
-          />
-          <IconButton
-            icon={<IoCheckmark />}
-            variant="outline"
-            isLoading={isLoading}
+          >
+            Try Again
+          </Button>
+          <Button
             colorScheme="green"
-            rounded="full"
             onClick={onSumbit}
-          />
+            isLoading={isLoading}
+            leftIcon={<IoCheckmark />}
+          >
+            Submit
+          </Button>
         </HStack>
       ) : (
         <IconButton
