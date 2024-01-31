@@ -7,6 +7,7 @@ import { IoCamera, IoCloseSharp, IoCheckmark } from 'react-icons/io5';
 <FaceVerification />
 ============================================================================= */
 const FaceVerification = ({
+  name,
   image,
   onSumbit,
   isLoading,
@@ -19,7 +20,9 @@ const FaceVerification = ({
     onImageClick(imageSrc);
   }, [camRef]);
 
-  const _handleRemoveImg = () => onImageClick('');
+  const _handleRemoveImg = () => {
+    onImageClick('');
+  };
 
   return (
     <VStack py={3} h="full" justify="space-between">
@@ -40,6 +43,12 @@ const FaceVerification = ({
             : 'Please be in the center of the frame'}
         </Text>
       </Box>
+
+      {name && (
+        <Text fontSize="2xl" fontWeight="medium">
+          Name: {name.replace('.jpg', '')}
+        </Text>
+      )}
 
       {image ? (
         <HStack>

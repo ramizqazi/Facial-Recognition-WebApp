@@ -9,7 +9,7 @@ import { useVerifyFace } from '../../api/mutations';
 ============================================================================= */
 const FaceVerification = () => {
   const toast = useToast();
-
+  const [name, setName] = useState();
   const [image, setImage] = useState();
 
   const { mutateAsync: verifyface, data, isLoading } = useVerifyFace();
@@ -21,12 +21,13 @@ const FaceVerification = () => {
         title: 'Error',
         isClosable: true,
         duration: 1500,
-        description: data.  Response
+        description: data.Response,
       });
     }
+    if (data?.Status === 200) {
+      setName(data?.Response);
+    }
   }, [data]);
-
-  console.log('Response Data', data);
 
   const _handleSubmit = async () => {
     try {
@@ -54,6 +55,7 @@ const FaceVerification = () => {
 
   return (
     <FaceVerificationView
+      name={name}
       image={image}
       isLoading={isLoading}
       onImageClick={setImage}
