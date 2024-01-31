@@ -36,7 +36,7 @@ const Welcome = () => {
             as={Link}
             flex={1}
             shadow="lg"
-            to="/add-user"
+            to="/users/add-user"
             className='hover'
           >
             <CardBody as={VStack} rowGap={5}>
@@ -48,7 +48,7 @@ const Welcome = () => {
             as={Link}
             flex={1}
             shadow="lg"
-            to="/face-verification"
+            to="/users/face-verification"
             className='hover'
           >
             <CardBody as={VStack} rowGap={5}>

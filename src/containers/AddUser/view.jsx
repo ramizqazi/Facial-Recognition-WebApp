@@ -36,13 +36,13 @@ const AddUserView = ({
   return (
     <VStack py={3} h="full" justify="center">
       <VStack>
-        {image ? (
-          <Img src={image} />
-        ) : (
-          <Box w="700px" h="450px" overflow="hidden" bg="black">
+        <Box w="700px" h="450px" overflow="hidden" bg="black">
+          {image ? (
+            <Img src={image} w='full' h='full' />
+          ) : (
             <Webcam ref={camRef} width={'100%'} height={'100%'} />
-          </Box>
-        )}
+          )}
+        </Box>
         <Text align="center" fontSize="xl" my={5}>
           {image
             ? 'Click the check button to sumbit'
