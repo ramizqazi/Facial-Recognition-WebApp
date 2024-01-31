@@ -28,7 +28,7 @@ const SideNavList = ({ isOpen }) => {
               display="flex"
               justifyContent={!isOpen && 'center'}
               position="relative"
-              bgColor={active ? "gray.400" : 'none'}
+              bgColor={active ? "green.500" : 'none'}
               borderRadius='6px'
               alignItems="center"
               textDecor="none !important"
