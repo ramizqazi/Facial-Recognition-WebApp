@@ -25,30 +25,27 @@ const FaceVerification = ({
   };
 
   return (
-    <VStack py={3} h="full" justify="space-between">
-      <Box>
+    <VStack py={3} h="full" justify="center">
+      <VStack>
         {image ? (
           <Img src={image} />
         ) : (
-          <Webcam
-            ref={camRef}
-            width={600}
-            height={600}
-            style={{ backgroundColor: 'black' }}
-          />
+          <Box w="700px" h="450px" overflow="hidden" bg="black">
+            <Webcam ref={camRef} width={'100%'} height={'100%'} />
+          </Box>
         )}
-        <Text align="center" fontSize="xl" mt={2}>
+        <Text align="center" fontSize="xl" my={5}>
           {image
             ? 'Click the check button to sumbit'
             : 'Please be in the center of the frame'}
         </Text>
-      </Box>
 
-      {name && (
-        <Text fontSize="2xl" fontWeight="medium">
-          Name: {name.replace('.jpg', '')}
-        </Text>
-      )}
+        {name && (
+          <Text fontSize="2xl" fontWeight="medium" mb={5}>
+            Name: {name?.replace('.jpg', '')}
+          </Text>
+        )}
+      </VStack>
 
       {image ? (
         <HStack>
