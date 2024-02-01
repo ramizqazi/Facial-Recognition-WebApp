@@ -1,17 +1,10 @@
 import React, { useCallback, useRef } from 'react';
-import Webcam from 'react-webcam';
-import {
-  Img,
-  Box,
-  Text,
-  HStack,
-  Button,
-  VStack,
-  IconButton,
-} from '@chakra-ui/react';
-import { IoCamera, IoCloseSharp, IoCheckmark } from 'react-icons/io5';
+import { HStack, VStack, useSteps } from '@chakra-ui/react';
 
-import Input from '../../components/Input';
+import Steps from '../../components/Steps';
+import Step1 from '../../components/AddUser/Step1';
+import Step2 from '../../components/AddUser/Step2';
+import Step3 from '../../components/AddUser/Step3';
 
 /* =============================================================================
 <AddUserView />
@@ -24,69 +17,69 @@ const AddUserView = ({
   onSumbit,
   isLoading,
 }) => {
-  const camRef = useRef();
+  const { activeStep, goToNext, goToPrevious } = useSteps({
+    index: 1,
+    count: steps.length,
+  });
 
-  const capture = useCallback(() => {
-    const imageSrc = camRef.current.getScreenshot();
-    onImageClick(imageSrc);
-  }, [camRef]);
+  const _handleImgAdd = url => {
+    onImageClick(url);
+    goToNext();
+  };
 
-  const _handleRemoveImg = () => onImageClick('');
+  const _handleImgRemove = () => {
+    onImageClick('');
+    goToPrevious();
+  };
+
+  const _handleSubmit = () => {
+    if (name) {
+      goToNext();
+    }
+    onSumbit();
+  };
+
+  const renderStepsView = () => {
+    switch (activeStep) {
+      case 1:
+        return (
+          <Step1
+            name={name}
+            onImageClick={_handleImgAdd}
+            onNameChange={onNameChange}
+          />
+        );
+      case 2:
+        return (
+          <Step2
+            name={name}
+            image={image}
+            isLoading={isLoading}
+            onImgRemove={_handleImgRemove}
+            onSumbit={_handleSubmit}
+            onNameChange={onNameChange}
+          />
+        );
+      case 3:
+        return <Step3 />;
+    }
+  };
 
   return (
-    <VStack py={3} h="full" justify="center">
-      <VStack>
-        <Box w="700px" h="450px" overflow="hidden" bg="black">
-          {image ? (
-            <Img src={image} w="full" h="full" />
-          ) : (
-            <Webcam ref={camRef} width={'100%'} height={'100%'} />
-          )}
-        </Box>
-        <Text align="center" fontSize="xl" my={5}>
-          {image
-            ? 'Click the check button to sumbit'
-            : 'Please be in the center of the frame'}
-        </Text>
-
-        <Input
-          value={name}
-          label="Name"
-          placeholder="Enter name"
-          onChange={e => onNameChange(e.target.value)}
-        />
+    <HStack h='full'>
+      <Steps activeStep={activeStep} steps={steps} />
+      <VStack w="full" py={3} h="full" justify="center">
+        {renderStepsView()}
       </VStack>
-
-      {image ? (
-        <HStack>
-          <Button
-            colorScheme="red"
-            leftIcon={<IoCloseSharp />}
-            isDisabled={isLoading}
-            onClick={_handleRemoveImg}
-          >
-            Try Again
-          </Button>
-          <Button
-            colorScheme="green"
-            onClick={onSumbit}
-            isLoading={isLoading}
-            leftIcon={<IoCheckmark />}
-          >
-            Submit
-          </Button>
-        </HStack>
-      ) : (
-        <IconButton
-          icon={<IoCamera />}
-          colorScheme="green"
-          px={8}
-          onClick={capture}
-        />
-      )}
-    </VStack>
+    </HStack>
   );
 };
+
+const steps = [
+  { title: 'First', description: 'Click a image' },
+  { title: 'Second', description: 'Confirm the image' },
+  { title: 'Third', description: 'Completed' },
+];
 
 /* Export
 ============================================================================= */

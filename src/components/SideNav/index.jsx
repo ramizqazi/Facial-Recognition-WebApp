@@ -27,7 +27,7 @@ const SideNav = ({ isLargerThan766 }) => {
           variant="unstyled"
           onClick={onOpen}
         >
-          <FiMenu />
+          <FiMenu size={22}/>
           <SideNavDrawer onClose={onClose} isOpen={isOpen} />
         </Button>
       </Box>
@@ -54,7 +54,7 @@ const SideNav = ({ isLargerThan766 }) => {
         variant="unstyled"
         onClick={_handleToggleDrawer}
       >
-        <FiMenu />
+        <FiMenu size={22}/>
       </Button>
       <SideNavList isOpen={isOpen} />
     </Box>

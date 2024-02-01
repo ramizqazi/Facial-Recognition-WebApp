@@ -24,7 +24,7 @@ const SideNavDrawer = ({ onClose, isOpen }) => (
           variant="unstyled"
           onClick={onClose}
         >
-          <FiMenu />
+          <FiMenu size={22} />
         </Button>
       </DrawerHeader>
       <DrawerBody px={4}>
