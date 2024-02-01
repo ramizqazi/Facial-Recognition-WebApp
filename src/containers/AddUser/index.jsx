@@ -13,7 +13,7 @@ const AddUser = () => {
   const [name, setName] = useState('');
   const [image, setImage] = useState();
 
-  const { mutateAsync: addUser, isLoading } = useAddUser();
+  const { mutateAsync: addUser, isLoading, isSuccess } = useAddUser();
 
   const _handleSubmit = async () => {
     try {
@@ -40,8 +40,8 @@ const AddUser = () => {
         description: `Image is saved with ${name} name`
       });
 
-      setImage('')
-      setName('')
+      setImage('');
+      setName('');
     } catch (e) {
       toast({
         status: 'error',
@@ -61,6 +61,7 @@ const AddUser = () => {
       onImageClick={setImage}
       onNameChange={setName}
       onSumbit={_handleSubmit}
+      isSuccess={isSuccess}
     />
   );
 };

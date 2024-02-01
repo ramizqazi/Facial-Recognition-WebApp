@@ -12,15 +12,18 @@ import Step3 from '../../components/AddUser/Step3';
 const AddUserView = ({
   image,
   name,
+  isSuccess,
   onNameChange,
   onImageClick,
   onSumbit,
   isLoading,
 }) => {
-  const { activeStep, goToNext, goToPrevious } = useSteps({
+  const { activeStep, goToNext, goToPrevious, setActiveStep } = useSteps({
     index: 1,
     count: steps.length,
   });
+
+  const _handleTryAgain = () => setActiveStep(1);
 
   const _handleImgAdd = url => {
     onImageClick(url);
@@ -61,7 +64,10 @@ const AddUserView = ({
           />
         );
       case 3:
-        return <Step3 />;
+        return <Step3 isSuccess={isSuccess} onTryAgain={_handleTryAgain} />;
+
+      default:
+        return null;
     }
   };
 
