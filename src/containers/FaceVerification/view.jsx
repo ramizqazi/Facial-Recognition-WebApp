@@ -1,91 +1,77 @@
-import Webcam from 'react-webcam';
-import React, { useCallback, useRef } from 'react';
-import {
-  Box,
-  Button,
-  HStack,
-  IconButton,
-  Img,
-  Text,
-  VStack,
-} from '@chakra-ui/react';
-import { IoCamera, IoCloseSharp, IoCheckmark } from 'react-icons/io5';
+import React from 'react';
+import { HStack, VStack, useSteps } from '@chakra-ui/react';
+
+import Steps from '../../components/Steps';
+import Step1 from '../../components/FaceVerification/Step1';
+import Step2 from '../../components/FaceVerification/Step2';
+import Step3 from '../../components/FaceVerification/Step3';
 
 /* =============================================================================
-<FaceVerification />
+<FaceVerificationView />
 ============================================================================= */
-const FaceVerification = ({
-  name,
+const FaceVerificationView = ({
   image,
+  name,
   onSumbit,
   isLoading,
   onImageClick,
 }) => {
-  const camRef = useRef();
+  const { activeStep, goToNext, setActiveStep, goToPrevious } = useSteps({
+    index: 1,
+    count: steps.length,
+  });
 
-  const capture = useCallback(() => {
-    const imageSrc = camRef.current.getScreenshot();
-    onImageClick(imageSrc);
-  }, [camRef]);
+  const _handleTryAgain = () => setActiveStep(1);
 
-  const _handleRemoveImg = () => {
+  const _handleImgAdd = url => {
+    onImageClick(url);
+    goToNext();
+  };
+
+  const _handleImgRemove = () => {
     onImageClick('');
+    goToPrevious();
+  };
+
+  const _handleSubmit = async () => {
+    await onSumbit();
+    goToNext();
+  };
+
+  const renderStepsView = () => {
+    switch (activeStep) {
+      case 1:
+        return <Step1 onImageClick={_handleImgAdd} />;
+      case 2:
+        return (
+          <Step2
+            image={image}
+            isLoading={isLoading}
+            onImgRemove={_handleImgRemove}
+            onSumbit={_handleSubmit}
+          />
+        );
+      case 3:
+        return <Step3 name={name} onTryAgain={_handleTryAgain} />;
+    }
   };
 
   return (
-    <VStack py={3} h="full" justify="center">
-      <VStack>
-        <Box w="700px" h="450px" overflow="hidden" bg="black">
-          {image ? (
-            <Img src={image} w="full" h="full" />
-          ) : (
-            <Webcam ref={camRef} width={'100%'} height={'100%'} />
-          )}
-        </Box>
-        <Text align="center" fontSize="xl" my={5}>
-          {image
-            ? 'Click the check button to sumbit'
-            : 'Please be in the center of the frame'}
-        </Text>
-
-        {name && (
-          <Text fontSize="2xl" fontWeight="medium" mb={5}>
-            Name: {name?.replace('.jpg', '')}
-          </Text>
-        )}
+    <HStack h="full">
+      <Steps activeStep={activeStep} steps={steps} />
+      <VStack w="full" py={3} h="full" justify="center">
+        {renderStepsView()}
       </VStack>
-
-      {image ? (
-        <HStack>
-          <Button
-            colorScheme="red"
-            leftIcon={<IoCloseSharp />}
-            isDisabled={isLoading}
-            onClick={_handleRemoveImg}
-          >
-            Try Again
-          </Button>
-          <Button
-            colorScheme="green"
-            onClick={onSumbit}
-            isLoading={isLoading}
-            leftIcon={<IoCheckmark />}
-          >
-            Submit
-          </Button>
-        </HStack>
-      ) : (
-        <IconButton
-          icon={<IoCamera />}
-          colorScheme="green"
-          px={8}
-          onClick={capture}
-        />
-      )}
-    </VStack>
+    </HStack>
   );
 };
 
+const steps = [
+  { title: 'First', description: 'Click a image' },
+  { title: 'Second', description: 'Confirm the image' },
+  { title: 'Third', description: 'Result' },
+];
+
 /* Export
 ============================================================================= */
-export default FaceVerification;
+export default FaceVerificationView;

@@ -1,32 +1,32 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { CiCircleCheck } from 'react-icons/ci';
+import { CiCircleCheck, CiCircleRemove } from 'react-icons/ci';
 import { Text, Button, VStack } from '@chakra-ui/react';
-import { IoChevronForward } from 'react-icons/io5';
+import { IoCloseSharp } from 'react-icons/io5';
 
 /* =============================================================================
 <Step3 />
 ============================================================================= */
-const Step3 = () => {
-  const navigate = useNavigate();
-
-  const _handleGoToVerify = () => navigate('/users/face-verification');
-
+const Step3 = ({ name, onTryAgain }) => {
   return (
     <>
       <VStack>
-        <CiCircleCheck size={55} color="#38A169" />
+        {name ? (
+          <CiCircleCheck size={55} color="#38A169" />
+        ) : (
+          <CiCircleRemove size={55} color="red" />
+        )}
+
         <Text align="center" fontSize="xl" my={5}>
-          Face Added Successfully
+          {name ? 'Face found successfully' : 'Face Not Found'}
         </Text>
       </VStack>
 
       <Button
-        colorScheme="green"
-        rightIcon={<IoChevronForward />}
-        onClick={_handleGoToVerify}
+        colorScheme="red"
+        leftIcon={<IoCloseSharp />}
+        onClick={onTryAgain}
       >
-        Go To Face Verificaion
+        Try Again
       </Button>
     </>
   );

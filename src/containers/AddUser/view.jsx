@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React from 'react';
 import { HStack, VStack, useSteps } from '@chakra-ui/react';
 
 import Steps from '../../components/Steps';
@@ -66,7 +66,7 @@ const AddUserView = ({
   };
 
   return (
-    <HStack h='full'>
+    <HStack h="full">
       <Steps activeStep={activeStep} steps={steps} />
       <VStack w="full" py={3} h="full" justify="center">
         {renderStepsView()}
