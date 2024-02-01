@@ -22,7 +22,7 @@ const Step1 = ({ name, onNameChange, onImageClick }) => {
         <Box w="full" h={['350', '350', "400px"]} overflow="hidden" bg="black">
           <Webcam ref={camRef} width={'100%'} height={'100%'} />
         </Box>
-        <Text align="center" fontSize="xl" my={5}>
+        <Text align="center" fontSize="xl" my={3}>
           Please be in the center of the frame
         </Text>
 
@@ -37,6 +37,7 @@ const Step1 = ({ name, onNameChange, onImageClick }) => {
       <IconButton
         px={8}
         py={5}
+        mb={2}
         icon={<IoCamera />}
         colorScheme="green"
         onClick={capture}

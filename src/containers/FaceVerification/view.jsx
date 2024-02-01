@@ -1,5 +1,5 @@
 import React from 'react';
-import { HStack, VStack, useSteps } from '@chakra-ui/react';
+import { HStack, Heading, VStack, useSteps } from '@chakra-ui/react';
 
 import Steps from '../../components/Steps';
 import Step1 from '../../components/FaceVerification/Step1';
@@ -57,7 +57,10 @@ const FaceVerificationView = ({
   };
 
   return (
-    <VStack w="full" h="full" justify="center">
+    <VStack w="full" h="full">
+      <Heading alignSelf="flex-start" fontWeight="bold">
+        Face Verification
+      </Heading>
       <Steps activeStep={activeStep} steps={steps} />
       <VStack w="full" h="full" flex={1} justify="center">
         {renderStepsView()}

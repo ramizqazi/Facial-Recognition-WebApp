@@ -1,5 +1,5 @@
 import React from 'react';
-import { HStack, VStack, useSteps } from '@chakra-ui/react';
+import { HStack, Heading, VStack, useSteps } from '@chakra-ui/react';
 
 import Steps from '../../components/Steps';
 import Step1 from '../../components/AddUser/Step1';
@@ -73,9 +73,10 @@ const AddUserView = ({
   };
 
   return (
-    <VStack w="full" h="full" justify="center">
+    <VStack w="full" h="full">
+      <Heading alignSelf='flex-start' fontWeight='bold'>Add Face</Heading>
       <Steps activeStep={activeStep} steps={steps} />
-      <VStack w="full" h="full" flex={1} justify='center'>
+      <VStack w="full" h="full" flex={1} justify="center">
         {renderStepsView()}
       </VStack>
     </VStack>

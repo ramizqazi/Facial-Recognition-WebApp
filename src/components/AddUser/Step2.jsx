@@ -18,10 +18,10 @@ const Step2 = ({
   return (
     <>
       <VStack>
-        <Box w="full" h={['350', '350', "400px"]}  overflow="hidden" bg="black">
+        <Box w="full" h={['350', '350', '400px']} overflow="hidden" bg="black">
           <Img src={image} w="full" h="full" />
         </Box>
-        <Text align="center" fontSize="xl" my={5}>
+        <Text align="center" fontSize="xl" my={3}>
           Click the check button to sumbit
         </Text>
 
@@ -33,7 +33,7 @@ const Step2 = ({
         />
       </VStack>
 
-      <HStack>
+      <HStack mb={2}>
         <Button
           colorScheme="red"
           leftIcon={<IoCloseSharp />}

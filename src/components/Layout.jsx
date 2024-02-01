@@ -20,7 +20,7 @@ const Layout = () => {
       <SideNav isLargerThan766={isLargerThan766} />
       <Flex
         flex={1}
-        px={3}
+        px={[3, 16, 16, 16]}
         py={6}
         bg="#fff"
         overflowY="auto"
