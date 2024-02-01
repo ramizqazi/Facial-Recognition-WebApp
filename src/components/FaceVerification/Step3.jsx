@@ -1,12 +1,16 @@
 import React from 'react';
-import { CiCircleCheck, CiCircleRemove } from 'react-icons/ci';
+import { IoChevronForward, IoCloseSharp } from 'react-icons/io5';
+import { useNavigate } from 'react-router-dom';
 import { Text, Button, VStack } from '@chakra-ui/react';
-import { IoCloseSharp } from 'react-icons/io5';
+import { CiCircleCheck, CiCircleRemove } from 'react-icons/ci';
 
 /* =============================================================================
 <Step3 />
 ============================================================================= */
 const Step3 = ({ name, onTryAgain }) => {
+  const navigate = useNavigate();
+
+  const _handleGoToVerify = () => navigate('/users/add-user');
   return (
     <>
       <VStack>
@@ -21,13 +25,23 @@ const Step3 = ({ name, onTryAgain }) => {
         </Text>
       </VStack>
 
-      <Button
-        colorScheme="red"
-        leftIcon={<IoCloseSharp />}
-        onClick={onTryAgain}
-      >
-        Try Again
-      </Button>
+      {name ? (
+        <Button
+          colorScheme="green"
+          rightIcon={<IoChevronForward />}
+          onClick={_handleGoToVerify}
+        >
+          Add another user
+        </Button>
+      ) : (
+        <Button
+          colorScheme="red"
+          leftIcon={<IoCloseSharp />}
+          onClick={onTryAgain}
+        >
+          Try Again
+        </Button>
+      )}
     </>
   );
 };

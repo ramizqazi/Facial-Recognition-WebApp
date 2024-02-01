@@ -35,11 +35,12 @@ const AddUserView = ({
     goToPrevious();
   };
 
-  const _handleSubmit = () => {
+  const _handleSubmit = async () => {
+    await onSumbit();
+
     if (name) {
       goToNext();
     }
-    onSumbit();
   };
 
   const renderStepsView = () => {
