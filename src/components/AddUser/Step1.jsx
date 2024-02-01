@@ -1,11 +1,6 @@
 import React, { useCallback, useRef } from 'react';
 import Webcam from 'react-webcam';
-import {
-  Box,
-  Text,
-  VStack,
-  IconButton,
-} from '@chakra-ui/react';
+import { Box, Text, VStack, IconButton } from '@chakra-ui/react';
 import { IoCamera } from 'react-icons/io5';
 
 import Input from '../Input';
@@ -13,17 +8,13 @@ import Input from '../Input';
 /* =============================================================================
 <Step1 />
 ============================================================================= */
-const Step1 = ({
-  name,
-  onNameChange,
-  onImageClick,
-}) => {
+const Step1 = ({ name, onNameChange, onImageClick }) => {
   const camRef = useRef();
 
   const capture = useCallback(() => {
     const imageSrc = camRef.current.getScreenshot();
     onImageClick(imageSrc);
-  }, [camRef]);
+  }, [camRef, onImageClick]);
 
   return (
     <>

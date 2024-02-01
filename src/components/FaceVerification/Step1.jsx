@@ -12,7 +12,7 @@ const Step1 = ({ onImageClick }) => {
   const capture = useCallback(() => {
     const imageSrc = camRef.current.getScreenshot();
     onImageClick(imageSrc);
-  }, [camRef]);
+  }, [camRef, onImageClick]);
 
   return (
     <>
