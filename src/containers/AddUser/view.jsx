@@ -73,18 +73,18 @@ const AddUserView = ({
   };
 
   return (
-    <HStack h="full">
+    <VStack w="full" h="full" justify="center">
       <Steps activeStep={activeStep} steps={steps} />
-      <VStack w="full" py={3} h="full" justify="center">
+      <VStack w="full" h="full" flex={1} justify='center'>
         {renderStepsView()}
       </VStack>
-    </HStack>
+    </VStack>
   );
 };
 
 const steps = [
   { title: 'First', description: 'Click a image' },
-  { title: 'Second', description: 'Confirm the image' },
+  { title: 'Second', description: 'Confirm image' },
   { title: 'Third', description: 'Completed' },
 ];
 

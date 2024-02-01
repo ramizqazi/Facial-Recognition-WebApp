@@ -9,20 +9,16 @@ import {
   StepSeparator,
   StepIndicator,
   StepDescription,
-  useMediaQuery,
 } from '@chakra-ui/react';
 
 const Steps = ({ steps, activeStep }) => {
-  const [isLargerThan766] = useMediaQuery('(min-width: 766px)');
   return (
     <Stepper
       index={activeStep}
-      display={isLargerThan766 ? 'flex' : 'none'}
-      orientation="vertical"
-      gap="0px"
-      colorScheme='green'
-      height="400px"
-      pl={10}
+      size={['sm', 'sm', 'md']}
+      colorScheme="green"
+      width={['full', '80%', '65%', '65%']}
+      pb={3}
     >
       {steps.map((step, index) => (
         <Step key={index}>
@@ -34,7 +30,7 @@ const Steps = ({ steps, activeStep }) => {
             />
           </StepIndicator>
 
-          <Box flexShrink="0">
+          <Box flexShrink={0}>
             <StepTitle>{step.title}</StepTitle>
             <StepDescription>{step.description}</StepDescription>
           </Box>

@@ -57,12 +57,12 @@ const FaceVerificationView = ({
   };
 
   return (
-    <HStack h="full">
+    <VStack w="full" h="full" justify="center">
       <Steps activeStep={activeStep} steps={steps} />
-      <VStack w="full" py={3} h="full" justify="center">
+      <VStack w="full" h="full" flex={1} justify="center">
         {renderStepsView()}
       </VStack>
-    </HStack>
+    </VStack>
   );
 };
 

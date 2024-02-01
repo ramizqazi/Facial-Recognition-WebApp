@@ -19,7 +19,7 @@ const Step1 = ({ name, onNameChange, onImageClick }) => {
   return (
     <>
       <VStack>
-        <Box w="700px" h="450px" overflow="hidden" bg="black">
+        <Box w="full" h={['350', '350', "400px"]} overflow="hidden" bg="black">
           <Webcam ref={camRef} width={'100%'} height={'100%'} />
         </Box>
         <Text align="center" fontSize="xl" my={5}>
@@ -35,9 +35,10 @@ const Step1 = ({ name, onNameChange, onImageClick }) => {
       </VStack>
 
       <IconButton
+        px={8}
+        py={5}
         icon={<IoCamera />}
         colorScheme="green"
-        px={8}
         onClick={capture}
       />
     </>

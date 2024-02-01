@@ -17,7 +17,7 @@ const Step1 = ({ onImageClick }) => {
   return (
     <>
       <VStack>
-        <Box w="700px" h="450px" overflow="hidden" bg="black">
+        <Box w="full" h={['350', '350', '400px']} overflow="hidden" bg="black">
           <Webcam ref={camRef} width={'100%'} height={'100%'} />
         </Box>
         <Text align="center" fontSize="xl" my={5}>

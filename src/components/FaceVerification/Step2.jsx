@@ -9,7 +9,7 @@ const Step2 = ({ image, onImgRemove, onSumbit, isLoading }) => {
   return (
     <>
       <VStack>
-        <Box w="700px" h="450px" overflow="hidden" bg="black">
+        <Box w="full" h={['350', '350', '400px']} overflow="hidden" bg="black">
           <Img src={image} w="full" h="full" />
         </Box>
         <Text align="center" fontSize="xl" my={5}>
